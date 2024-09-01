@@ -1,0 +1,26 @@
+# Archivos y carpetas de NetBeans
+nbproject/private/
+nbproject/nbproject.properties
+nbproject/project.xml
+# Directorios de construcción y salida de Ant
+build/
+dist/
+# Logs
+logs/
+*.log
+# Archivos generados por el compilador
+*.class
+# Archivos temporales y de respaldo
+*.swp
+*~
+*.swo
+*.bak
+# Archivos de configuración del sistema operativo
+.DS_Store
+Thumbs.db
+# Archivos específicos de otros IDEs (si aplican)
+.idea/
+*.iml
+.vscode/
+# Configuraciones de control de versiones
+*.orig
