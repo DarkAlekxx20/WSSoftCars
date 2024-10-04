@@ -14,8 +14,7 @@ public class Automovil {
     public Date modelo;
     public int color;
 
-    public Automovil() {
-    }
+    public Automovil() {}
 
     public Automovil(int idAutomovil, String marca, Date modelo, int color) {
         this.idAutomovil = idAutomovil;
