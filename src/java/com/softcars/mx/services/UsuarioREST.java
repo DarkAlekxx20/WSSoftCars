@@ -29,11 +29,11 @@ public class UsuarioREST {
         try {
             u = gson.fromJson(userData, Usuario.class);
             uc.sigin(u);
+            out = "{\"Success\":\"Se guardo correctamente el usuario!\"}\n";
         } catch (Exception e) {
             e.printStackTrace();
             out = "{\"error\":\"Error en base de datos :(\"}\n";
         }
-        out = "{\"Success\":\"Se guardo correctamente el usuario!\"}\n";
         return Response.status(Response.Status.OK).entity(out).build();
     }
 }
