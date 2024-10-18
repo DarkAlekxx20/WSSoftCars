@@ -27,12 +27,13 @@ public class UsuarioREST {
         Usuario u = null;
         UsuarioController uc = new UsuarioController();
         try {
-            uc.sigin(u);
             u = gson.fromJson(userData, Usuario.class);
+            uc.sigin(u);
         } catch (Exception e) {
             e.printStackTrace();
             out = "{\"error\":\"Error en base de datos :(\"}\n";
         }
+        out = "{\"Success\":\"Se guardo correctamente el usuario!\"}\n";
         return Response.status(Response.Status.OK).entity(out).build();
     }
 }
