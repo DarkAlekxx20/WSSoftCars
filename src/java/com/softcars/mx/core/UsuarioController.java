@@ -48,22 +48,44 @@ public class UsuarioController {
     public boolean sigin(Usuario us) throws Exception {
         boolean r = false;
         DBConnector dbConnector = new DBConnector();
-        Connection conn = dbConnector.open();
+        Connection conn = null;
         CallableStatement cstmt = null;
         try {
+            conn = dbConnector.open();
             conn.setAutoCommit(false);
             String sql = "call softcars.sp_insertUser(?,?,?);";
             cstmt = conn.prepareCall(sql);
             cstmt.setString(1, us.getUsername());
             cstmt.setString(2, us.getPassword());
             cstmt.setInt(3, us.getEstatus());
-            cstmt.executeUpdate();
+            int rowsAffected = cstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                conn.commit();
+                r = true;
+            } else {
+                conn.rollback();
+            }
         } catch (Exception ex) {
+            if (conn != null) {
+                conn.rollback();
+            }
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            conn.close();
+            if (cstmt != null) {
+                try {
+                    cstmt.close();
+                } catch (Exception e) {
+                    Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
             dbConnector.close();
-            cstmt.close();
         }
         return r;
     }
