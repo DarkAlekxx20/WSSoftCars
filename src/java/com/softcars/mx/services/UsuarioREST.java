@@ -50,10 +50,10 @@ public class UsuarioREST {
             u = gson.fromJson(userData, Usuario.class);
             u = uc.login(u.getUsername(), u.getPassword());
             if (u != null && u.getEstatus() == 1) {
-                out = gson.toJson(u);
+                out = "{\"success\":\"Bienvendio a SoftCars: "+u.getUsername()+"!\"}\n";
             } else if (u.getEstatus() != 1) {
                 out = "{\"error\":\"El usuario esta con estatus inactivo!\"}\n";
-            } else {
+            } else if (u == null) {
                 out = "{\"error\":\"Datos de credencial incorrectos!\"}\n";
             }
         } catch (Exception e) {
