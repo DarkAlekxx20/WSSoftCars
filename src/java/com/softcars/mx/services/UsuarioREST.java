@@ -49,12 +49,12 @@ public class UsuarioREST {
         try {
             u = gson.fromJson(userData, Usuario.class);
             u = uc.login(u.getUsername(), u.getPassword());
-            if (u != null && u.getEstatus() == 1) {
-                out = "{\"success\":\"Bienvendio a SoftCars: "+u.getUsername()+"!\"}\n";
+            if (u == null) {
+                out = "{\"error\":\"Datos de credencial incorrectos!\"}\n";
+            } else if (u != null && u.getEstatus() == 1) {
+                out = "{\"success\":\"Bienvendio a SoftCars: " + u.getUsername() + "!\"}\n";
             } else if (u.getEstatus() != 1) {
                 out = "{\"error\":\"El usuario esta con estatus inactivo!\"}\n";
-            } else if (u == null) {
-                out = "{\"error\":\"Datos de credencial incorrectos!\"}\n";
             }
         } catch (Exception e) {
             e.printStackTrace();
