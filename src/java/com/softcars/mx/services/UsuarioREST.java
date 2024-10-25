@@ -26,11 +26,16 @@ public class UsuarioREST {
         String out = null;
         Gson gson = new Gson();
         Usuario u = null;
+        boolean r = false;
         UsuarioController uc = new UsuarioController();
         try {
             u = gson.fromJson(userData, Usuario.class);
-            uc.sigin(u);
-            out = "{\"Success\":\"Se guardo correctamente el usuario!\"}\n";
+            r = uc.sigin(u);
+            if(r == true){
+                out = "{\"success\":\"Se guardo correctamente el usuario!\"}\n";
+            }else{
+                out = "{\"error\":\"Hubo un error al realizar el registro!\"}\n";
+            }
         } catch (Exception e) {
             e.printStackTrace();
             out = "{\"error\":\"Error en base de datos :(\"}\n";
